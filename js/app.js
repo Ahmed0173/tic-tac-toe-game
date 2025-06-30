@@ -13,32 +13,26 @@ const winningCombos = [
 
 /*---------------------------- Variables (state) ----------------------------*/
 
-let board;
-let turn;
-let winner;
-let tie;
-
+let board
+let turn
+let winner
+let tie
 
 /*------------------------ Cached Element References ------------------------*/
 
 const squareEls = document.querySelectorAll('.sqr')
 const messageEl = document.getElementById('message')
-
-console.log(squareEls)
-console.log(messageEl)
+const resetBtnEl = document.getElementById('reset')
 
 /*-------------------------------- Functions --------------------------------*/
 
 function init() {
-  console.log('init is running')
   board = ['', '', '', '', '', '', '', '', '']
   turn = 'X'
   winner = false
   tie = false
-  render();
+  render()
 }
-
-init();
 
 function render() {
   updateBoard()
@@ -61,4 +55,45 @@ function updateMessage() {
   }
 }
 
+function handleClick(evt) {
+  const squareIndex = parseInt(evt.target.id)
+  if (board[squareIndex] !== '' || winner) return
+  placePiece(squareIndex)
+  checkForWinner()
+  checkForTie()
+  switchPlayerTurn()
+  render()
+}
+
+function placePiece(index) {
+  board[index] = turn
+}
+
+function checkForWinner() {
+  winningCombos.forEach(combo => {
+    const [a, b, c] = combo
+    if (board[a] !== '' && board[a] === board[b] && board[a] === board[c]) {
+      winner = true
+    }
+  })
+}
+
+function checkForTie() {
+  if (winner) return
+  tie = board.every(cell => cell !== '')
+}
+
+function switchPlayerTurn() {
+  if (winner) return
+  turn = turn === 'X' ? 'O' : 'X'
+}
+
 /*----------------------------- Event Listeners -----------------------------*/
+
+squareEls.forEach(square => {
+  square.addEventListener('click', handleClick)
+})
+
+resetBtnEl.addEventListener('click', init)
+
+init()
