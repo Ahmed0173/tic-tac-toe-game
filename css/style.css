@@ -8,6 +8,7 @@ body {
   display: flex;
   flex-wrap: wrap;
   width: 325px;
+  margin: 20px auto;
 }
 
 .sqr {
@@ -18,3 +19,49 @@ body {
   text-align: center;
 }
 
+.sqr:hover {
+  cursor: pointer;
+  background-color: rgba(146, 144, 144, 0.542);
+}
+
+.sqr:active {
+  background-color: rgba(146, 144, 144, 0.742);
+}
+
+h1 {
+  text-align: center;
+  color: darkslategray;
+}
+
+h2 {
+  text-align: center;
+  color: darkslategray;
+}
+
+#message {
+  text-align: center;
+  color: darkslategray;
+  font-size: 24px;
+}
+
+#reset {
+  display: block;
+  margin: 20px auto;
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: darkslategray;
+  color: white;
+  border: none;
+  border-radius: 5px;
+}
+
+#reset:hover {
+  background-color: slategray;
+  transform: scale(1.05);
+  cursor: pointer;
+}
+
+#reset:active {
+  background-color: gray;
+  transform: scale(1);
+}
